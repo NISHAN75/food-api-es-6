@@ -3,10 +3,11 @@ const searchFood=()=>{
     const searchFiled=document.getElementById('search-filed');
     const searchFiledValue=searchFiled.value;
     searchFiled.value='';
-    const errorMessage=document.getElementById('error-area');
     if(searchFiledValue ==''){
+        const errorMessage=document.getElementById('error-area');
         const div=document.createElement('div');
         div.innerHTML=`<h4>Please give a food name</h4>`;
+        // div.innerHTML='';
         errorMessage.appendChild(div);
     }
     else{
@@ -17,10 +18,11 @@ const searchFood=()=>{
    .then(data => displayResult(data))
     }
 }
+const mainCard=document.getElementById('card-info');
 // show details
 const displayResult= searchResut =>{
     const meals=searchResut.meals;
-    const mainCard=document.getElementById('card-info');
+    // const mainCard=document.getElementById('card-info');
     mainCard.textContent='';
     console.log(meals)
     if(meals == null){
@@ -30,7 +32,6 @@ const displayResult= searchResut =>{
     }
     else{
         for(const meal of meals){
-
             const div=document.createElement('div');
             div.innerHTML=`
             <div onclick="loadDetails('${meal.idMeal}')" class="card">
@@ -56,8 +57,9 @@ const loadDetails=mealId=>{
 const dispalyMealDetails= meal =>{
     const cardDetails=document.getElementById('card-details');
     const div=document.createElement('div');
+    mainCard.textContent='';
     div.innerHTML=`
-    <div class="card">
+    <div class="card w-50 mx-auto">
         <img src="${meal.strMealThumb}" class="card-img-top" alt="..." />
         <div class="card-body">
           <h5 class="card-title">${meal.strMeal}</h5>
